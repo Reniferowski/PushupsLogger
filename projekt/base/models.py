@@ -7,13 +7,13 @@ class User(models.Model):
     pseudonim = models.CharField(max_length=20)
     wiek = models.IntegerField()
 
-class pushups(models.Model):
+class Pushups(models.Model):
     id_uzytkownika = models.ForeignKey(User, on_delete = models.CASCADE)
     data = models.DateTimeField(auto_now_add=True)
     powtorzenia = models.IntegerField()
     seria = models.IntegerField()
 
-class ranking(models.Model):
+class Ranking(models.Model):
     id_uzytkownika = models.ForeignKey(User, on_delete = models.CASCADE)
     sumaPowt = models.IntegerField()
     iloscSerii = models.IntegerField()

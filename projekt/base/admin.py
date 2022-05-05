@@ -1,3 +1,7 @@
 from django.contrib import admin
 
-# Register your models here.
+from .models import User, Ranking, Pushups
+
+admin.site.register(User)
+admin.site.register(Ranking)
+admin.site.register(Pushups)
