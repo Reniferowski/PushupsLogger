@@ -1,7 +1,10 @@
 {
   "ExpandedNodes": [
     "",
-    "\\projekt"
+    "\\projekt",
+    "\\projekt\\base",
+    "\\projekt\\base\\templates"
   ],
+  "SelectedNode": "\\projekt\\base\\models.py",
   "PreviewInSolutionExplorer": false
 }
