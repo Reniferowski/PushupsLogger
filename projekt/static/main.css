@@ -1,0 +1,22 @@
+.logo
+{
+    display: flex;
+    height: 180px;
+    align-content: center;
+}
+
+#logo-text
+{
+    font-size: 69px;
+    text-shadow: 2px 2px 4px black;
+}
+#logo-img
+{ 
+    display: block;
+    margin-top: 15px;
+}
+
+#main
+{
+    height: 100%;
+}
