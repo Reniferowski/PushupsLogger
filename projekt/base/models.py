@@ -1,11 +1,10 @@
 from django.db import models
+from django.contrib.auth.models import AbstractUser
 
-class User(models.Model):
-    id_uzytkownika = models.BigAutoField(primary_key=True)
-    imie = models.CharField(max_length=30)
-    nazwisko = models.CharField(max_length=35)
-    pseudonim = models.CharField(max_length=20)
-    wiek = models.IntegerField()
+class User(AbstractUser):
+    imie = models.CharField(max_length=30, null = True)
+    nazwisko = models.CharField(max_length=35, null = True)
+    wiek = models.IntegerField(null = True)
 
 class Pushups(models.Model):
     id_uzytkownika = models.ForeignKey(User, on_delete = models.CASCADE)

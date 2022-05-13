@@ -3,8 +3,9 @@
     "",
     "\\projekt",
     "\\projekt\\base",
-    "\\projekt\\base\\templates"
+    "\\projekt\\base\\migrations",
+    "\\projekt\\projekt"
   ],
-  "SelectedNode": "\\projekt\\base\\admin.py",
+  "SelectedNode": "\\projekt\\base\\models.py",
   "PreviewInSolutionExplorer": false
 }
