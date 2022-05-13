@@ -5,18 +5,20 @@
     align-content: center;
 }
 
+a
+{
+    text-shadow: 1px -1px 3px #000000, -1px 1px 7px #000000;
+    font-size: 25px;
+}
+
 #logo-text
 {
     font-size: 69px;
-    text-shadow: 2px 2px 4px black;
+    text-shadow: 2px 2px 8px black;
 }
+
 #logo-img
 { 
     display: block;
     margin-top: 15px;
-}
-
-#main
-{
-    height: 100%;
 }
