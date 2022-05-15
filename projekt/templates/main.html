@@ -24,13 +24,19 @@
     </div>
       <nav class="container navbar navbar-expand-lg navbar-light pt-3" style="background-color: #e3f2fd;">
         <div class="shadow-sm container justify-content-around bg-info rounded">
-          <a class="nav-link text-white" href="#">Strona główna</a>
-          <a class="nav-link text-white" href="#">Profil</a>
-          <a class="nav-link text-white" href="#">Ranking</a>
-          <a class="nav-link text-white" href="#">Kontakt</a>
+          <a class="nav-link text-white" href="{% url 'home' %}">Strona główna</a>
+          <a class="nav-link text-white" href="{% url 'user' %}">Profil</a>
+          <a class="nav-link text-white" href="{% url 'ranking' %}">Ranking</a>
+          <a class="nav-link text-white" href="{% url 'kontakt' %}">Kontakt</a>
         </div>
       </nav>
-
+     {% if messages %}
+     <ul class="messages">
+        {% for message in messages %}
+            <li>{{ message }}</li>
+        {% endfor %}
+     </ul>
+     {% endif %}
     <div class="container rounded-bottom" style="background-color: #e3f2fd;">
       {% block content %}
   
