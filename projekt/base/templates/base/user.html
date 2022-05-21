@@ -1,6 +1,17 @@
 {% extends 'main.html' %}
 
 {% block content %}
-<h1>Template</h1>
-
-{% endblock %}
+<div class="container">
+  <div class="roomList">
+    <div class="profile">
+      <div class="profile__info">
+        <h3>{{user.name}}</h3>
+        <p>{{user.username}}</p>
+      </div>
+      <div class="profile__about">
+        <h3>About</h3>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock content %}

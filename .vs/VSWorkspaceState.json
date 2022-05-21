@@ -4,8 +4,10 @@
     "\\projekt",
     "\\projekt\\base",
     "\\projekt\\base\\migrations",
-    "\\projekt\\projekt"
+    "\\projekt\\base\\templates",
+    "\\projekt\\base\\templates\\base",
+    "\\projekt\\projekt",
+    "\\projekt\\templates"
   ],
-  "SelectedNode": "\\projekt\\projekt\\settings.py",
   "PreviewInSolutionExplorer": false
 }

@@ -1,11 +1,11 @@
-﻿from django.shortcuts import render
+﻿from django.shortcuts import render, redirect
 from .models import User
 from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
 
 def loginPage(request):
     if request.method == "POST":
-        username = request.POST.get("usesrname")
+        username = request.POST.get("username")
         password = request.POST.get("password")
 
         try:
@@ -25,12 +25,12 @@ def loginPage(request):
 
 def logoutUser(request):
     logout(request)
-    return rediret("home")
+    return redirect("home")
 
 def home(request):
     return render(request, 'base/home.html')
 
-def user(request, pk):
+def userProfile(request, pk):
     user = User.objects.get(id = pk)
     context = {'user': user}
     return render(request, 'base/user.html', context)
