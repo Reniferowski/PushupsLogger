@@ -20,6 +20,11 @@
         <div class="col-3">
           <h1 id="logo-text">Pushups Logger</h1>
         </div>
+        <div class="col-3">
+          {% if request.user.is_authenticated %}
+            <h1 id="logo-text">{{ user.username }}</h1>
+          {% endif %}
+        </div>
       </div>
     </div>
       <nav class="container navbar navbar-expand-lg navbar-light pt-3" style="background-color: #e3f2fd;">
@@ -37,14 +42,14 @@
           {% endif %}
         </div>
       </nav>
-     {% if messages %}
-     <ul class="messages">
-        {% for message in messages %}
-            <li>{{ message }}</li>
-        {% endfor %}
-     </ul>
-     {% endif %}
-    <div class="container rounded-bottom" style="background-color: #e3f2fd;">
+      <div class="container rounded-bottom" style="background-color: #e3f2fd;">
+        {% if messages %}
+        <ul class="messages">
+           {% for message in messages %}
+               <li>{{ message }}</li>
+           {% endfor %}
+        </ul>
+        {% endif %}
       {% block content %}
   
       {% endblock content %}
