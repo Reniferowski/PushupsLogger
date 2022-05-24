@@ -3,11 +3,11 @@
     "",
     "\\projekt",
     "\\projekt\\base",
-    "\\projekt\\base\\migrations",
     "\\projekt\\base\\templates",
     "\\projekt\\base\\templates\\base",
     "\\projekt\\projekt",
     "\\projekt\\templates"
   ],
+  "SelectedNode": "\\projekt\\base\\views.py",
   "PreviewInSolutionExplorer": false
 }

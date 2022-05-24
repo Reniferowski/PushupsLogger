@@ -1,11 +1,15 @@
 ﻿from django.shortcuts import render, redirect
 from .models import User
 from django.contrib import messages
-from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth import authenticate, login, logout, get_user_model
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth.forms import UserCreationForm
+from .forms import UserForm, UserRegister
 
 def loginPage(request):
+    page = "login"
     if request.method == "POST":
-        username = request.POST.get("username")
+        username = request.POST.get("username").lower()
         password = request.POST.get("password")
 
         try:
@@ -20,12 +24,28 @@ def loginPage(request):
             return redirect("home")
         else:
             messages.error(request, "Błędna nazwa użytkownika lub hasło")
-    context= {}
-    return render(request, "base/login.html", context)
+    context= {"page": page}
+    return render(request, "base/login_register.html", context)
 
 def logoutUser(request):
     logout(request)
     return redirect("home")
+
+def registerPage(request):
+    user = get_user_model()
+    form = UserRegister()
+
+    if request.method == "POST":
+        form = UserRegister(request.POST)
+        if form.is_valid():
+            user = form.save(commit=False)
+            user.username = user.username.lower()
+            user.save()
+            login(request, user)
+            return redirect('home')
+        else:
+            messages.error(request, "Wystąpił problem podczas zakładania konta")
+    return render(request, 'base/login_register.html', {"form": form})
 
 def home(request):
     return render(request, 'base/home.html')
@@ -40,3 +60,16 @@ def ranking(request):
 
 def kontakt(request):
     return render(request, "base/kontakt.html")
+
+@login_required(login_url='login')
+def updateUser(request):
+    user = request.user
+    form = UserForm(instance=user)
+
+    if request.method == "POST":
+        form = UserForm (request.POST, instance=user)
+        if form.is_valid():
+            form.save()
+            return redirect("user-profile", pk=user.id)
+
+    return render(request, 'base/update-user.html', {'form': form})
