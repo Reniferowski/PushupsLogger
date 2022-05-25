@@ -1,19 +1,15 @@
-{% extends 'main.html' %}
+{% extends 'main.html' %} {% block content %}
+<form class="form" action="" method="POST">
+  {% csrf_token %} {% for field in form %}
+  <div>
+    <label>{{field.label}}</label>
+    {{field}}
+  </div>
+  {% endfor %}
 
-{% block content %}
-        <form class="form" action="" method="POST">
-          {% csrf_token %}
-
-          {% for field in form %}
-          <div>
-            <label>{{field.label}}</label>
-            {{field}}
-          </div>
-          {% endfor %}
-
-          <div>
-            <a href="">Cancel</a>
-            <button type="submit">Update</button>
-          </div>
-        </form>
+  <div>
+    <a href="{% url 'user-profile' user.id %}">Cancel</a>
+    <button type="submit">Update</button>
+  </div>
+</form>
 {% endblock content %}
