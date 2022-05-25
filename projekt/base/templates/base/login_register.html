@@ -1,37 +1,60 @@
-﻿{% extends "main.html" %}
-
-{% block content %}
-
-{% if page == 'login' %}
-<div>
-	<form method="POST" action="">
-		{% csrf_token %}
-
-		<label> Login:</label>
-		<input type="text" name="username" placeholder="Nazwa użytkownika" />
-		
-		<label>Hasło:</label>
-		<input type="password" name="password" placeholder="Hasło" />
-
-		<input type="submit" value="Login" />
-	</form>
-
-	<p> Nie masz jeszcze konta?<p>
-	<a href="{% url 'register' %}">Zarejestruj się</a>
-</div>
+﻿{% extends "main.html" %} {% block content %} {% if page == 'login' %}
+<form method="POST" action="" class="p-3">
+  {% csrf_token %}
+  <div class="form-group row m-2">
+    <label class="col-1 col-form-label"> Login:</label>
+    <div class="col-auto">
+      <input
+        type="text"
+        name="username"
+        class="form-control"
+        placeholder="Nazwa użytkownika"
+      />
+    </div>
+  </div>
+  <div class="form-group row m-2">
+    <label class="col-1 col-form-label">Hasło:</label>
+    <div class="col-auto">
+      <input
+        type="password"
+        name="password"
+        class="form-control"
+        placeholder="Hasło"
+      />
+    </div>
+  </div>
+  <div class="form-group row m-2">
+    <button type="submit" class="btn btn-info col-1 text-white NLINK">
+      Login
+    </button>
+  </div>
+  <div class="form-group row m-2 pt-2">
+	  <p>Nie masz jeszcze konta?</p>
+	  <a href="{% url 'register' %}" class="btn col-auto bg-info text-white NLINK">Zarejestruj się</a>
+  </div>
+</form>
 
 {% else %}
-
-<div>
-	<form method="POST" action="">
-		{% csrf_token %}
-		{{form.as_p}}
-		<input type="submit" value="Zarejestruj" />
-	</form>
-	<p> Masz już konto?<p>
-	<a href="{% url 'login' %}">Zaloguj się</a>
+  <form method="POST" action="" class="p-3">
+    {% csrf_token %}
+    {% for field in form %} 
+      <div class="form-group row m-2">
+        <label class="col-2 col-form-label">{{field.label}}</label> 
+        <div class="col-auto">
+          {{field}} 
+        </div>
+      </div> 
+    {% endfor %}
+    <div class="form-group row m-2">
+      <button type="submit" class="btn btn-info col-2 text-white NLINK">
+        Zarejestruj
+      </button>
+    </div>
+    <div class="form-group row m-2 pt-2">
+      <p>Masz już konto?</p>
+      <a href="{% url 'login' %}" class="btn col-2 bg-info text-white NLINK">Zaloguj się</a>
+    </div>
+  </form>
 </div>
 
-{% endif %}
-
-{% endblock content%}
+{% endif %} {% endblock content%}

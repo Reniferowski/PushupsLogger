@@ -12,33 +12,36 @@
     <title>Pushups Logger</title>
   </head>
   <body style="background-color: #646464;">
-    <div  class="container logo bg-info text-white rounded-top">
-      <div class="row">
-        <div class="col-3">
+    <div  class="container bg-info text-white rounded-top">
+      <div class="row logo">
+        <div class="col-auto">
           <img src="{% static 'images/pushlogo.png' %}" alt="logo" id="logo-img">
         </div>
-        <div class="col-3">
-          <h1 id="logo-text">Pushups Logger</h1>
+        <div class="col-6">
+          <h1 id="logo-text">Pushups<br>Logger</h1>
         </div>
-        <div class="col-3">
+        <div class="col-4 align-self-center">
           {% if request.user.is_authenticated %}
-            <h1 id="logo-text">{{ user.username }}</h1>
+            <h1 id="logo-text" style="float:right; font-size: 60px;">Logged as</h1>
+            <h3 id="logo-text" style="float:right; font-size: 50px;">
+              <a href="{% url 'user-profile' user.id %}" style="text-decoration: none; color: white;">{{ user.username }}</a>
+            </h3>
           {% endif %}
         </div>
       </div>
     </div>
       <nav class="container navbar navbar-expand-lg navbar-light pt-3" style="background-color: #e3f2fd;">
         <div class="shadow-sm container justify-content-around bg-info rounded">
-          <a class="nav-link text-white" href="{% url 'home' %}">Strona główna</a>
+          <a class="nav-link text-white NLINK" href="{% url 'home' %}">Strona główna</a>
           {% if request.user.is_authenticated %}
-          <a class="nav-link text-white" href="{% url 'user-profile' user.id %}">Profil</a>
+          <a class="nav-link text-white NLINK" href="{% url 'user-profile' user.id %}">Profil</a>
           {% else %}
-          <a class="nav-link text-white" href="{% url 'login' %}">Profil</a>
+          <a class="nav-link text-white NLINK" href="{% url 'login' %}">Profil</a>
           {% endif %}
-          <a class="nav-link text-white" href="{% url 'ranking' %}">Ranking</a>
-          <a class="nav-link text-white" href="{% url 'kontakt' %}">Kontakt</a>
+          <a class="nav-link text-white NLINK" href="{% url 'ranking' %}">Ranking</a>
+          <a class="nav-link text-white NLINK" href="{% url 'kontakt' %}">Kontakt</a>
           {% if request.user.is_authenticated %}
-            <a class="nav-link text-white" href="{% url 'logout' %}">Logout</a>
+            <a class="nav-link text-white NLINK" href="{% url 'logout' %}">Logout</a>
           {% endif %}
         </div>
       </nav>
