@@ -22,4 +22,15 @@ class UserRegister(UserCreationForm):
 class UserForm(ModelForm):
     class Meta:
         model = User
-        fields = ["username", "email"]
+        fields = ["username", "email", "imie", "nazwisko", "wiek"]
+        widgets = {
+            'username': forms.TextInput(attrs={'class': 'form-control',"placeholder":"Pseudonim"}),
+            'email': forms.TextInput(attrs={'class': 'form-control',"placeholder":"Adres Email"}),
+            'imie': forms.TextInput(attrs={'class': 'form-control',"placeholder":"Imie"}),
+            'nazwisko': forms.TextInput(attrs={'class': 'form-control',"placeholder":"Nazwisko"}),
+            'wiek': forms.NumberInput(attrs={'class': 'form-control',"placeholder":"Wiek"}),
+        }
+        labels = {
+            'username': "Pseudonim",
+            'email': "Adres Email",
+        }
