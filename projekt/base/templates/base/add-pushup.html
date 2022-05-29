@@ -1,0 +1,25 @@
+{% extends 'main.html' %} {% block content %}
+<div class="container p-3">
+  <form class="form" action="" method="POST">
+    {% csrf_token %} {% for field in form %}
+    <div class="p-1">
+      <div class="form-group row m-1">
+        <label class="col-2 col-form-label">{{field.label}}</label>
+        <div class="col-auto">{{field}}</div>
+      </div>
+    </div>
+    {% endfor %}
+
+    <div class="p-3">
+      <a
+        href="{% url 'user-profile' user.id %}"
+        class="btn col-1 bg-info text-white NLINK m-1"
+        >Anuluj
+      </a>
+      <button type="submit" class="btn col-1 bg-info text-white NLINK m-1">
+        Dodaj
+      </button>
+    </div>
+  </form>
+</div>
+{% endblock content %}

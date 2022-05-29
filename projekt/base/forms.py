@@ -1,6 +1,6 @@
 from django.forms import ModelForm
 from django.contrib.auth.forms import UserCreationForm
-from .models import User
+from .models import User, Pushups
 from django import forms
 from django.contrib.auth.forms import UsernameField
 
@@ -33,4 +33,13 @@ class UserForm(ModelForm):
         labels = {
             'username': "Pseudonim",
             'email': "Adres Email",
+        }
+
+class PushupsForm(ModelForm):
+    class Meta:
+        model = Pushups
+        fields = ["powtorzenia", "seria"]
+        labels = {
+            'powtorzenia': "powtorzenia",
+            'seria': "seria",
         }

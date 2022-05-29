@@ -14,6 +14,7 @@
         <p> {{user.opis}}</p>
       </div>
       {% if request.user == user %}
+      <a href= "{% url 'add-pushup' %}">Dodaj trening</a>
        <a href= "{% url 'update-user' %}">Edit profile</a>
       {%  endif %}
        </div>

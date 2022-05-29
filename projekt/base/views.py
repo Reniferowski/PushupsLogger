@@ -1,10 +1,10 @@
 ﻿from django.shortcuts import render, redirect
-from .models import User
+from .models import User, Pushups
 from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout, get_user_model
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import UserCreationForm
-from .forms import UserForm, UserRegister
+from .forms import UserForm, UserRegister, PushupsForm
 
 def loginPage(request):
     page = "login"
@@ -73,3 +73,17 @@ def updateUser(request):
             return redirect("user-profile", pk=user.id)
 
     return render(request, 'base/update-user.html', {'form': form})
+
+@login_required(login_url="login")
+def addPushup(request):
+    form = PushupsForm()
+    user = request.user
+
+    if request.method == "POST":
+        Pushups.objects.create(
+            id_uzytkownika = request.user,
+            powtorzenia = request.POST.get("powtorzenia"),
+            seria = request.POST.get("seria"),
+            )
+        return redirect("user-profile", pk=user.id)
+    return render(request, "base/add-pushup.html", {"form": form})
