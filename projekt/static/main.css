@@ -17,3 +17,8 @@
   display: block;
   margin-top: 15px;
 }
+
+.avatarpic {
+  width: 75px;
+  height: 75px;
+}
