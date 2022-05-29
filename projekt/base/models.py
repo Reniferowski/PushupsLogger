@@ -2,11 +2,14 @@ from django.db import models
 from django.contrib.auth.models import AbstractUser
 
 class User(AbstractUser):
-    imie = models.CharField(max_length=30, null = True)
-    nazwisko = models.CharField(max_length=35, null = True)
+    imie = models.CharField(max_length=30, null = True, blank = True)
+    nazwisko = models.CharField(max_length=35, null = True, blank = True)
     first_name = None
     last_name= None
-    wiek = models.IntegerField(null = True)
+    wiek = models.IntegerField(null = True, blank = True)
+    email = models.EmailField(unique=True, null = True)
+    avatar = models.ImageField(null=True, default="avatar.webp")
+    opis = models.TextField(max_length=250, null = True, blank = True)
 
 class Pushups(models.Model):
     id_uzytkownika = models.ForeignKey(User, on_delete = models.CASCADE)

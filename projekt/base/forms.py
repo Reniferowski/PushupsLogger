@@ -7,7 +7,7 @@ from django.contrib.auth.forms import UsernameField
 class UserRegister(UserCreationForm):
     class Meta:
         model = User
-        fields = ["username", "email", "password1", "password2"]
+        fields = ["username", "email", "password1", "password2", "avatar"]
         widgets = {
             'username': forms.TextInput(attrs={'class': 'form-control',"placeholder":"Pseudonim"}),
             'email': forms.TextInput(attrs={'class': 'form-control',"placeholder":"Adres Email"}),
@@ -22,7 +22,7 @@ class UserRegister(UserCreationForm):
 class UserForm(ModelForm):
     class Meta:
         model = User
-        fields = ["username", "email", "imie", "nazwisko", "wiek"]
+        fields = ["username", "email", "imie", "nazwisko", "wiek", "avatar", "opis"]
         widgets = {
             'username': forms.TextInput(attrs={'class': 'form-control',"placeholder":"Pseudonim"}),
             'email': forms.TextInput(attrs={'class': 'form-control',"placeholder":"Adres Email"}),

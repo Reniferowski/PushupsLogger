@@ -4,12 +4,14 @@
 <div class="container">
     <div class="profile">
       <div class="profile__info">
-        <h3 class="p-1">{{user.name}}</h3>
+      <img style="width: 75px;height: 75px" src="{{ user.avatar.url }}"/>
+        <h3 class="p-1">{{user.imie}}</h3>
         <p>{{user.username}}</p>
         <p>{{user.wiek}}</p>
       </div>
       <div class="profile__about">
         <h3>About</h3>
+        <p> {{user.opis}}</p>
       </div>
       {% if request.user == user %}
        <a href= "{% url 'update-user' %}">Edit profile</a>

@@ -24,6 +24,7 @@
           {% if request.user.is_authenticated %}
             <h1 id="logo-text" style="float:right; font-size: 60px;">Logged as</h1>
             <h3 id="logo-text" style="float:right; font-size: 50px;">
+              <img style="width: 75px;height: 75px" src="{{ user.avatar.url }}"/>
               <a href="{% url 'user-profile' user.id %}" style="text-decoration: none; color: white;">{{ user.username }}</a>
             </h3>
           {% endif %}
