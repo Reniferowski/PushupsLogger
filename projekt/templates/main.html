@@ -20,12 +20,14 @@
         <div class="col-6">
           <h1 id="logo-text">Pushups<br>Logger</h1>
         </div>
-        <div class="col-4 align-self-center">
+        <div class="col-4 d-flex flex-column align-items-end">
           {% if request.user.is_authenticated %}
-            <h1 id="logo-text" style="float:right; font-size: 60px;">Logged as</h1>
-            <h3 id="logo-text" style="float:right; font-size: 50px;">
-              <img style="width: 75px;height: 75px" src="{{ user.avatar.url }}"/>
-              <a href="{% url 'user-profile' user.id %}" style="text-decoration: none; color: white;">{{ user.username }}</a>
+            <h1 id="logo-text" style="font-size: 60px;">Logged as</h1>
+            <h3 id="logo-text" style="font-size: 50px;">
+              <a href="{% url 'user-profile' user.id %}" style="text-decoration: none; color: white;">
+                <img class="rounded-circle avatarpic" src="{{ user.avatar.url }}"/>
+                {{ user.username }} 
+              </a>
             </h3>
           {% endif %}
         </div>
