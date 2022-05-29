@@ -1,6 +1,6 @@
 {% extends 'main.html' %} {% block content %}
 <div class="container p-3">
-  <form class="form" action="" method="POST">
+  <form class="form" action="" method="POST" enctype="multipart/form-data">
     {% csrf_token %} {% for field in form %}
     <div class="p-1">
       <div class="form-group row m-1">
@@ -16,7 +16,7 @@
         class="btn col-1 bg-info text-white NLINK m-1"
         >Anuluj
       </a>
-      <button type="submit" class="btn col-1 bg-info text-white NLINK m-1">
+      <button type="submit" class="btn col-auto bg-info text-white NLINK m-1">
         Zaktualizuj
       </button>
     </div>
