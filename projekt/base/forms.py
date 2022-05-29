@@ -29,6 +29,7 @@ class UserForm(ModelForm):
             'imie': forms.TextInput(attrs={'class': 'form-control',"placeholder":"Imie"}),
             'nazwisko': forms.TextInput(attrs={'class': 'form-control',"placeholder":"Nazwisko"}),
             'wiek': forms.NumberInput(attrs={'class': 'form-control',"placeholder":"Wiek"}),
+            'opis': forms.Textarea(attrs={'class': 'form-control',"placeholder":"Opis"}),
         }
         labels = {
             'username': "Pseudonim",
