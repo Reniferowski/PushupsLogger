@@ -1,4 +1,8 @@
 {% extends 'main.html' %} {% block content %}
+<h1 class="p-2 text-center">
+  Dodaj Trening
+  <hr />
+</h1>
 <div class="container p-3">
   <form class="form" action="" method="POST">
     {% csrf_token %} {% for field in form %}
