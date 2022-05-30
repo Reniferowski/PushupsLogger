@@ -28,8 +28,8 @@ class UserForm(ModelForm):
             'email': forms.TextInput(attrs={'class': 'form-control',"placeholder":"Adres Email"}),
             'imie': forms.TextInput(attrs={'class': 'form-control',"placeholder":"Imie"}),
             'nazwisko': forms.TextInput(attrs={'class': 'form-control',"placeholder":"Nazwisko"}),
-            'wiek': forms.NumberInput(attrs={'class': 'form-control',"placeholder":"Wiek"}),
-            'opis': forms.Textarea(attrs={'class': 'form-control',"placeholder":"Opis"}),
+            'wiek': forms.NumberInput(attrs={'class': 'form-control'}),
+            'opis': forms.Textarea(attrs={'class': 'form-control',"placeholder":"Opis", 'rows': '7'}),
         }
         labels = {
             'username': "Pseudonim",
@@ -40,7 +40,11 @@ class PushupsForm(ModelForm):
     class Meta:
         model = Pushups
         fields = ["powtorzenia", "seria"]
+        widgets = {
+            'powtorzenia': forms.NumberInput(attrs={'class': 'form-control'}),
+            'seria': forms.NumberInput(attrs={'class': 'form-control'}),
+        }
         labels = {
-            'powtorzenia': "powtorzenia",
-            'seria': "seria",
+            'powtorzenia': "Suma powtórzeń",
+            'seria': "Ilość serii",
         }
