@@ -1,20 +1,40 @@
 {% extends 'main.html' %} {% load static %} {% block style %}
 <link rel="stylesheet" type="text/css" href="{% static 'base/user.css' %}" />
 {% endblock style%} {% block content %}
-<div class="container p-4">
-  <div class="profile_info">
-    <img class="profile_avatar" src="{{ user.avatar.url }}" />
-    <h3>{{user.imie}}</h3>
-    <h2>{{user.username}}</h2>
-    <h2>{{user.wiek}}</h2>
+<h1 class="p-2 text-center">
+  Informacje o użytkowniku
+  <hr />
+</h1>
+<div class="container d-flex p-4">
+  <div class="col-6">
+    <div class="row d-flex">
+      <div class="col-auto">
+        <img class="profile_avatar rounded" src="{{ user.avatar.url }}" />
+      </div>
+      <div class="col-auto">
+        <h3 class="p-2">{{user.username}}</h3>
+        <h2 class="p-2">{{user.wiek}}</h2>
+      </div>
+    </div>
+    <h3 class="pt-3">{{user.imie}} {{user.nazwisko}}</h3>
+    <h3>{{user.email}}</h3>
   </div>
-  <div class="profile_about col-4">
-    <h3>About</h3>
+  <div class="col-6">
+    <h3>Opis</h3>
     <p>{{user.opis}}</p>
   </div>
-  {% if request.user == user %}
-  <a href="{% url 'add-pushup' %}">Dodaj trening</a>
-  <a href="{% url 'update-user' %}">Edit profile</a>
-  {% endif %}
 </div>
-{% endblock content %}
+{% if request.user == user %}
+<div class="d-flex justify-content-between">
+  <a
+    href="{% url 'update-user' %}"
+    class="btn col-auto bg-info text-white NLINK m-1"
+    >Zaktualizuj profil</a
+  >
+  <a
+    href="{% url 'add-pushup' %}"
+    class="btn col-auto bg-info text-white NLINK m-1"
+    >Dodaj trening</a
+  >
+</div>
+{% endif %} {% endblock content %}
