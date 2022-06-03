@@ -52,7 +52,8 @@ def home(request):
 
 def userProfile(request, pk):
     user = User.objects.get(id = pk)
-    context = {'user': user}
+    pushups = user.pushups_set.all()
+    context = {'user': user, 'pushups': pushups}
     return render(request, 'base/user.html', context)
 
 def ranking(request):

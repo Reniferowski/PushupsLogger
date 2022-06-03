@@ -36,5 +36,9 @@
     class="btn col-auto bg-info text-white NLINK m-1"
     >Dodaj trening</a
   >
-</div>
-{% endif %} {% endblock content %}
+  {% endif %}
+  </div>
+  {% for pushup in pushups %}
+    <span>{{pushup.data}} {{pushup.powtorzenia}} {{pushup.seria}} </span> </br>
+  {% endfor %}
+{% endblock content %}
