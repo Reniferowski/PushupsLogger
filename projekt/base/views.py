@@ -5,6 +5,8 @@ from django.contrib.auth import authenticate, login, logout, get_user_model
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import UserCreationForm
 from .forms import UserForm, UserRegister, PushupsForm
+from django.db.models import Count, Q, Sum
+from datetime import datetime, timedelta
 
 def loginPage(request):
     page = "login"
@@ -52,12 +54,10 @@ def home(request):
 
 def userProfile(request, pk):
     user = User.objects.get(id = pk)
-    pushups = user.pushups_set.all()
+    pushups = user.pushups.all()
     context = {'user': user, 'pushups': pushups}
     return render(request, 'base/user.html', context)
 
-def ranking(request):
-    return render(request, "base/ranking.html")
 
 def kontakt(request):
     return render(request, "base/kontakt.html")
@@ -83,9 +83,16 @@ def addPushup(request):
 
     if request.method == "POST":
         Pushups.objects.create(
-            id_uzytkownika = request.user,
+            user = request.user,
             powtorzenia = request.POST.get("powtorzenia"),
             seria = request.POST.get("seria"),
             )
         return redirect("user-profile", pk=user.id)
     return render(request, "base/add-pushup.html", {"form": form})
+
+def ranking(request):
+    now = datetime.now()
+    data = (now - timedelta(days=now.weekday())).replace(hour=0,minute=0,second=0,microsecond=0)
+    users = User.objects.annotate(pushupRecord = Sum("pushups__powtorzenia", filter = Q(pushups__data__gte=data))).order_by('-pushupRecord')[:3]
+    context = {'users': users}
+    return render(request, "base/ranking.html", context)
