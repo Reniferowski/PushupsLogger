@@ -12,12 +12,15 @@ class User(AbstractUser):
     opis = models.TextField(max_length=250, null = True, blank = True)
 
 class Pushups(models.Model):
-    id_uzytkownika = models.ForeignKey(User, on_delete = models.CASCADE)
+    user = models.ForeignKey(User, on_delete = models.CASCADE, related_name="pushups")
     data = models.DateTimeField(auto_now_add=True)
     powtorzenia = models.IntegerField()
     seria = models.IntegerField()
 
+    class Meta:
+        verbose_name_plural = "Pushups"
+
 class Ranking(models.Model):
-    id_uzytkownika = models.ForeignKey(User, on_delete = models.CASCADE)
+    user = models.ForeignKey(User, on_delete = models.CASCADE)
     sumaPowt = models.IntegerField()
     iloscSerii = models.IntegerField()
