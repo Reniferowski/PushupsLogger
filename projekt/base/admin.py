@@ -14,7 +14,7 @@ class userAdmin(admin.ModelAdmin):
 @admin.register(Pushups)
 class pushupsAdmin(admin.ModelAdmin):
     fields = ("powtorzenia", "seria")
-    list_display = ("id_uzytkownika", "data")
+    list_display = ("user", "data")
     list_filter = ("data",)
-    ordering = ("id_uzytkownika",)
-    search_fields = ("data", "id_uzytkownika")
+    ordering = ("user",)
+    search_fields = ("data", "user")
