@@ -1,4 +1,4 @@
-{% extends 'main.html' %} {% load static %} {% block style %}
+{% extends 'main.html' %} {% load i18n %} {% load static %} {% block style %}
 <link rel="stylesheet" type="text/css" href="{% static 'base/user.css' %}" />
 {% endblock style%} {% block content %}
 <h1 class="p-2 text-center">
@@ -41,7 +41,7 @@
 <!--prettier-ignore-->
 <h2 class="text-center p-2">Lista Treningów</h2>
 <div class="container p-2">
-  <table class="table shadow table-active table-hover">
+  <table class="table shadow table-active table-hover text-center">
     <thead>
       <tr>
         <th>Data</th>
@@ -52,7 +52,9 @@
     <tbody>
       {% for pushup in pushups %}
       <tr>
-        <th>{{pushup.data}}</th>
+        <th>
+          {% language 'pl' %} {{pushup.data | date:"d.m.y "}} {% endlanguage %}
+        </th>
         <th>{{pushup.powtorzenia}}</th>
         <th>{{pushup.seria}}</th>
       </tr>
