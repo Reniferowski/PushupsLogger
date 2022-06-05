@@ -37,6 +37,27 @@
     >Dodaj trening</a
   >
 </div>
-{% endif %} {% for pushup in pushups %}
-<span>{{pushup.data}} {{pushup.powtorzenia}} {{pushup.seria}} </span> <br />
-{% endfor %} {% endblock content %}
+{% endif %}
+<!--prettier-ignore-->
+<h2 class="text-center p-2">Lista Treningów</h2>
+<div class="container p-2">
+  <table class="table shadow table-active table-hover">
+    <thead>
+      <tr>
+        <th>Data</th>
+        <th>Suma Powtórzeń</th>
+        <th>Ilość serii</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for pushup in pushups %}
+      <tr>
+        <th>{{pushup.data}}</th>
+        <th>{{pushup.powtorzenia}}</th>
+        <th>{{pushup.seria}}</th>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+{% endblock content %}
