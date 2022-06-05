@@ -6,6 +6,8 @@
     "\\projekt\\base\\templates",
     "\\projekt\\base\\templates\\base",
     "\\projekt\\projekt",
+    "\\projekt\\static",
+    "\\projekt\\static\\images",
     "\\projekt\\templates"
   ],
   "SelectedNode": "\\projekt\\base\\views.py",

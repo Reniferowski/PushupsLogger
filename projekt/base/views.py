@@ -93,6 +93,8 @@ def addPushup(request):
 def ranking(request):
     now = datetime.now()
     data = (now - timedelta(days=now.weekday())).replace(hour=0,minute=0,second=0,microsecond=0)
+    dzien = (now - timedelta(days=now.day-1)).replace (hour=0,minute=0,second=0,microsecond=0)
     users = User.objects.annotate(pushupRecord = Sum("pushups__powtorzenia", filter = Q(pushups__data__gte=data))).order_by('-pushupRecord')[:3]
-    context = {'users': users}
+    usersMonth = User.objects.annotate(pushupMonth = Sum("pushups__seria", filter = Q(pushups__data__gte=dzien))).order_by('-pushupMonth')[:5]
+    context = {'users': users, 'usersMonth': usersMonth}
     return render(request, "base/ranking.html", context)
