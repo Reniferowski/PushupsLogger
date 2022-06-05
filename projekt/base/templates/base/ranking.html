@@ -2,6 +2,8 @@
 
 {% block content %}
 
-
+{% for user in users %}
+    {{user.pushupRecord}}<br/>
+{% endfor %}
 
 {% endblock content %}
