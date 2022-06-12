@@ -10,7 +10,8 @@ class User(AbstractUser):
     email = models.EmailField(unique=True, null = True)
     avatar = models.ImageField(null=True, default="avatar.webp")
     opis = models.TextField(max_length=250, null = True, blank = True)
-    limit = models.BooleanField()
+    limit = models.BooleanField(default = False)
+    dzien = models.DateTimeField(default = None)
 
 class Pushups(models.Model):
     user = models.ForeignKey(User, on_delete = models.CASCADE, related_name="pushups")

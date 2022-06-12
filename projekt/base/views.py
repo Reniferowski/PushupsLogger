@@ -7,6 +7,7 @@ from django.contrib.auth.forms import UserCreationForm
 from .forms import UserForm, UserRegister, PushupsForm
 from django.db.models import Count, Q, Sum
 from datetime import datetime, timedelta
+from django.utils import timezone
 
 from django.http import FileResponse
 import io
@@ -86,6 +87,12 @@ def updateUser(request):
 def addPushup(request):
     form = PushupsForm()
     user = request.user
+    now = timezone.now()
+    dzien = (now - timedelta(days=now.day-1)).replace(hour=0,minute=0,second=0,microsecond=0)
+    if(user.dzien == None or user.dzien <= dzien):
+       user.limit = False
+    else:
+        user.limit = True
     if(user.limit == False):
         if request.method == "POST":
             Pushups.objects.create(
@@ -94,6 +101,7 @@ def addPushup(request):
                 seria = request.POST.get("seria"),
                 )
             user.limit = True
+            user.dzien = datetime.now()
             user.save()
             return redirect("user-profile", pk=user.id)
     else:
