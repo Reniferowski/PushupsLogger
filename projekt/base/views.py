@@ -88,7 +88,6 @@ def addPushup(request):
     form = PushupsForm()
     user = request.user
     now = timezone.now()
-    dzien = (now - timedelta(days=now.hour + now.minute)).replace(hour=0,minute=0,second=0,microsecond=0)
     if(user.dzien == None or user.dzien.date() < now.date()):
        user.limit = False
     else:
