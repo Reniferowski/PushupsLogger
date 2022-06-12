@@ -86,13 +86,18 @@ def updateUser(request):
 def addPushup(request):
     form = PushupsForm()
     user = request.user
-
-    if request.method == "POST":
-        Pushups.objects.create(
-            user = request.user,
-            powtorzenia = request.POST.get("powtorzenia"),
-            seria = request.POST.get("seria"),
-            )
+    if(user.limit == False):
+        if request.method == "POST":
+            Pushups.objects.create(
+                user = request.user,
+                powtorzenia = request.POST.get("powtorzenia"),
+                seria = request.POST.get("seria"),
+                )
+            user.limit = True
+            user.save()
+            return redirect("user-profile", pk=user.id)
+    else:
+        messages.error(request, "Dodałeś już dzisiaj trening")
         return redirect("user-profile", pk=user.id)
     return render(request, "base/add-pushup.html", {"form": form})
 
