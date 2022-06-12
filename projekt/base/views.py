@@ -8,6 +8,15 @@ from .forms import UserForm, UserRegister, PushupsForm
 from django.db.models import Count, Q, Sum
 from datetime import datetime, timedelta
 
+from django.http import FileResponse
+import io
+from reportlab.pdfgen import canvas
+from reportlab.lib.units import inch
+from reportlab.lib.pagesizes import letter
+from reportlab.pdfbase import pdfmetrics
+from reportlab.pdfbase.ttfonts import TTFont
+from reportlab.platypus import SimpleDocTemplate, Table
+
 def loginPage(request):
     page = "login"
     if request.method == "POST":
@@ -59,9 +68,6 @@ def userProfile(request, pk):
     return render(request, 'base/user.html', context)
 
 
-def kontakt(request):
-    return render(request, "base/kontakt.html")
-
 @login_required(login_url='login')
 def updateUser(request):
     user = request.user
@@ -98,3 +104,42 @@ def ranking(request):
     usersMonth = User.objects.annotate(pushupMonth = Sum("pushups__seria", filter = Q(pushups__data__gte=dzien))).order_by('-pushupMonth')[:3]
     context = {'users': users, 'usersMonth': usersMonth}
     return render(request, "base/ranking.html", context)
+
+def gen_pdf(request):
+    buf = io.BytesIO()
+    pdfmetrics.registerFont(TTFont('Arial', 'Arial.ttf'))
+    c = canvas.Canvas(buf, pagesize = letter, bottomup = 0)
+    c.setTitle("Zestawienie Treningów")
+    c.setFont("Arial", 14)
+    
+
+    user = request.user
+    pushups = user.pushups.all()
+
+    lines = [
+        ["Data Treningu", "Powtorzenia", "Serie"],
+    ]
+
+
+    for pushup in pushups:
+        p = [pushup.data.strftime("%d.%m.%Y"), str(pushup.powtorzenia), str(pushup.seria)]
+        lines.append(p)
+
+    lines.reverse()
+
+    style = [
+        ('GRID', (0,1), (-1,-1), 1, (0,0,0)),
+        ('ALIGN',(0,0),(-1,-1),'CENTER'),
+        ('FONTSIZE', (0, 0), (-1,-1), 18),
+        ('FONTNAME', (0,-1), (-1,-1), 'Helvetica-Bold')
+    ]
+
+    t = Table(lines, colWidths=[150,150,150], style=style)
+    t.wrapOn(c, 80, 80)
+    t.drawOn(c, 80, 80)
+
+    c.showPage()
+    c.save()
+    buf.seek(0)
+
+    return FileResponse(buf, as_attachment=False, filename="Zestawienie_Treningow_"+str(user.username)+".pdf")
