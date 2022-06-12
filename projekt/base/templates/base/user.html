@@ -26,16 +26,26 @@
 </div>
 {% if request.user == user %}
 <div class="d-flex justify-content-between">
-  <a
-    href="{% url 'update-user' %}"
-    class="btn col-auto bg-info text-white NLINK m-1"
-    >Zaktualizuj profil</a
-  >
-  <a
-    href="{% url 'add-pushup' %}"
-    class="btn col-auto bg-info text-white NLINK m-1"
-    >Dodaj trening</a
-  >
+  <div class="p-2">
+    <a
+      href="{% url 'update-user' %}"
+      class="btn col-auto bg-info text-white NLINK m-1"
+      >Zaktualizuj profil</a
+    >
+  </div>
+  <div class="p-2">
+    <a
+      href="{% url 'gen_pdf' %}"
+      class="btn col-auto bg-info text-white NLINK m-1"
+      target="_blank"
+      >Wygeneruj PDF</a
+    >
+    <a
+      href="{% url 'add-pushup' %}"
+      class="btn col-auto bg-info text-white NLINK m-1"
+      >Dodaj trening</a
+    >
+  </div>
 </div>
 {% endif %}
 <!--prettier-ignore-->
