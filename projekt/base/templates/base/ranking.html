@@ -1,13 +1,51 @@
-﻿{% extends 'main.html' %}
+﻿{% extends 'main.html' %} {% block content %}
 
-{% block content %}
+<h1 class="p-2 text-center">
+  Ranking
+  <hr />
+</h1>
 
-{% for user in users %}
-    {{user.pushupRecord}}<br/>
-{% endfor %}
-
-{% for user in usersMonth %}
-    {{user.pushupMonth}}<br/>
-{% endfor %}
+<div class="row display-flex justify-content-around">
+  <div class="col-auto w-50">
+    <h2 class="text-center">Top 5 ilości powtórzeń</h2>
+    <h2 class="text-center p-2">w tygodniu</h2>
+    <table class="table shadow table-active table-hover text-center">
+      <thead>
+        <tr>
+          <th>Użytkownik</th>
+          <th>ilość powtórzeń</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for user in users %}
+        <tr>
+          <th>{{user.username}}</th>
+          <th>{{user.pushupRecord}}</th>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+  <div class="col-auto w-50">
+    <h2 class="text-center">Top 3 ilości serii</h2>
+    <h2 class="text-center p-2">w miesiącu</h2>
+    <table class="table shadow table-active table-hover text-center">
+      <thead>
+        <tr>
+          <th>Użytkownik</th>
+          <th>Ilość serii</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for user in usersMonth %}
+        <tr>
+          <th>{{user.username}}</th>
+          <th>{{user.pushupMonth}}</th>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</div>
 
 {% endblock content %}
