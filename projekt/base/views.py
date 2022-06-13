@@ -14,9 +14,7 @@ import io
 from reportlab.pdfgen import canvas
 from reportlab.lib.units import inch
 from reportlab.lib.pagesizes import letter
-from reportlab.pdfbase import pdfmetrics
-from reportlab.pdfbase.ttfonts import TTFont
-from reportlab.platypus import SimpleDocTemplate, Table
+from reportlab.platypus import Table
 
 def loginPage(request):
     page = "login"
@@ -119,22 +117,31 @@ def ranking(request):
 
 def gen_pdf(request):
     buf = io.BytesIO()
-    pdfmetrics.registerFont(TTFont('Arial', 'Arial.ttf'))
     c = canvas.Canvas(buf, pagesize = letter, bottomup = 0)
     c.setTitle("Zestawienie Treningów")
-    c.setFont("Arial", 14)
+    c.setFont("Helvetica", 14)
     
 
     user = request.user
     pushups = user.pushups.all()
 
+    c.drawString(105,100,
+        "Zestawienie treningow uzytkownika "+
+        str(user.username)+
+        " na dzien "+str(datetime.today().strftime("%d.%m.%Y"))
+    )
+
     lines = [
         ["Data Treningu", "Powtorzenia", "Serie"],
     ]
 
+    push = 0
+    series = 0
 
     for pushup in pushups:
         p = [pushup.data.strftime("%d.%m.%Y"), str(pushup.powtorzenia), str(pushup.seria)]
+        push += pushup.powtorzenia
+        series += pushup.seria
         lines.append(p)
 
     lines.reverse()
@@ -147,8 +154,12 @@ def gen_pdf(request):
     ]
 
     t = Table(lines, colWidths=[150,150,150], style=style)
-    t.wrapOn(c, 80, 80)
-    t.drawOn(c, 80, 80)
+    t.wrapOn(c, 80, 160)
+    t.drawOn(c, 80, 160)
+
+    c.drawString(105,450,"Do tej pory zrobiles: ")
+    c.drawString(105,470, str(push) + " pompek! ")
+    c.drawString(105,490, str(series) + " serii! ")
 
     c.showPage()
     c.save()
